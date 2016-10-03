@@ -1,4 +1,4 @@
-def numbers_to_words( the_number )
+def fiw( the_number )
   matches = {
     0 => 'Zero',
     1 => 'One',
@@ -49,7 +49,7 @@ def numbers_to_words( the_number )
     rem       = the_number % 100
     if rem && rem != 0
       the_words = matches [ hundreds ] + ' ' + matches[ 100 ]
-      tens = numbers_to_words( rem )
+      tens = fiw( rem )
       "#{the_words} and #{tens}"
     else
       matches [ hundreds ] + ' ' + matches[ 100 ]
@@ -67,18 +67,18 @@ def numbers_to_words( the_number )
   when the_number < 1000000
     hun_thousands = the_number / 1000
     rem = check_remains( the_number % 1000 )
-    the_words = numbers_to_words( hun_thousands ) +' '+ matches[ 1000 ] +' '+ numbers_to_words( the_number - ( hun_thousands * 1000 ) )
+    the_words = fiw( hun_thousands ) +' '+ matches[ 1000 ] +' '+ fiw( the_number - ( hun_thousands * 1000 ) )
     the_words
   when the_number < 10000000
     millions = the_number / 1000000
-    the_words = numbers_to_words( millions )+' '+ matches[ 1000000] +' '+ numbers_to_words( the_number - 1000000 )
+    the_words = fiw( millions )+' '+ matches[ 1000000] +' '+ fiw( the_number - 1000000 )
   end
 
 end
 
 def check_remains( the_number )
   rem = the_number % 1000
-  rem = ( rem && rem != 0 )? ', ' + numbers_to_words( rem ) : ''
+  rem = ( rem && rem != 0 )? ', ' + fiw( rem ) : ''
 end
 
 
